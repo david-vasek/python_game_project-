@@ -39,7 +39,7 @@ def choose_location(user):
                                     3. The Gym
                                     4. The Shady Looking Woods
                                     5. The Recreation Center
-        """)
+                                """)
         print():
             if choose_location == "1":
                 front_yard_outside_house()
