@@ -1,21 +1,20 @@
-from classes import Player, Boss, NPC, Location
+from classes import Location, Player, Boss
 
 # Character Instances
-player = Player('You', 45, 5)
+player = Player('You', 45, 5, 'bedroom')
 nemesis = Boss('The Spelling Nemesis', 100, 3)
 # sean = NPC('Sean')
 # zach = NPC('Zach')
 # sam = NPC('Sam')
 
 # Locations
-bedroom = Location('Bedroom', '\nYou are in the BEDROOM.')
-bathroom = Location('Bathroom', 'You are in the BATHROOM.')
-lobby = Location('Lobby', 'You are in the LOBBY.')
-gym = Location('Gym', 'You are outside of the GYM.')
+bedroom = Location("Bedroom", "You are in the bedroom.", ['bathroom', 'lobby'])
+bathroom = Location('Bathroom', 'You are in the BATHROOM.', ['bedroom'])
+# lobby = Location('Lobby', 'You are in the LOBBY.', [])
+# gym = Location('Gym', 'You are outside of the GYM.', [])
 
 # START in the BEDROOM
-
-bedroom.bedroom_dialogue(player)
+bedroom.dialogue(player)
 
 # player.obtain('a')
 # player.obtain('d')

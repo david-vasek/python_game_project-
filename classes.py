@@ -2,37 +2,39 @@
 import random
 
 class Location:
-    def __init__(self, name, description):
+    def __init__(self, name, description, connections):
         self.name = name
         self.description = description
-
+        self.connections = connections
 # Inside of the Bedroom
-    def bedroom_dialogue(self, player):
-        player.location = 'bedroom'
-
-        # You are in the BEDROOM
-        while player.location == 'bedroom':
-            print(self.description)
-            print('What would you like to do?')
-            print('\n1. Take a Nap')
-            print('2. Check the Trashbin')
-            print("3. Go to the Bathroom")
-            print("4. Go to the Lobby")
-            print("5. Quit.\n")
-            user_input = int(input('> '))
-            if user_input == 1:
-                player.restore()
-            elif user_input == 2:
-                player.trash()
-            elif user_input == 5:
-                break
-    
-            # Move to the BATHROOM
-            elif user_input == 3:
-                player.location = 'bathroom'
-                while player.location == 'bathroom':
+    def dialogue(self, player):
+        while True:
+            if player.location == 'bedroom':
+                while True:
+                    # You are in the BEDROOM
+                    print(self.description)
+                    print('What would you like to do?')
+                    print('\n1. Take a Nap')
+                    print('2. Check the Trashbin')
+                    print("3. Go to the Bathroom")
+                    print("4. Go to the Lobby")
+                    print("5. Quit.\n")
+                    user_input = int(input('> '))
+                    if user_input == 1:
+                        player.restore()
+                    elif user_input == 2:
+                        player.trash()
+                    elif user_input == 3:
+                        player.location = 'bathroom'
+                        break
+                    else:
+                        print('Please enter a valid option.')
+            # You are in the Bathroom
+            if player.location == 'bathroom':
+                while True:
                         print('\nYou are in the BATHROOM.')
                         print('What would you like to do?')
+
                         print('\n1. Check the Mirror')
                         print('2. Go back to the Bedroom')
                         user_input = int(input('> '))
@@ -42,13 +44,9 @@ class Location:
                         # Go back to the Bedroom
                         elif user_input == 2:
                                 player.location = 'bedroom'
+                                break
                         else:
-                            print('Please enter a valid option.')              
-            else:
-                print('Please enter a valid option.')
-
-
-# Inside of the Bathroom
+                            print('Please enter a valid option.')
 
 class Character:
     def __init__(self, name, health, power):
@@ -58,12 +56,12 @@ class Character:
 
 
 class Player(Character):
-    def __init__(self, name, health, power):
+    def __init__(self, name, health, power, location):
         super().__init__(name, health, power)
         self.inventory = []
         self.awareness = []
         self.trashbin = []
-        self.location = ''
+        self.location = location
 
     def alive(self):
         if self.health > 0:
@@ -83,6 +81,11 @@ class Player(Character):
     def restore(self):
         self.health = 45
         print('\nYou take a nap and recover to full hp!')
+    
+    # Talk to Sam
+    def chat(self):
+        print('You are talking to Sam.')
+
 
     # Player encounters the Spelling Nemesis
     def encounter(self, target):
