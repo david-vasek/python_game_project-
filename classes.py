@@ -54,7 +54,14 @@ class Game:
 
     # The Final Encounter with the Nemesis
     def final_encounter(self, player, nemesis):
+        print()
         print('Oh no! It\'s the Spelling Nemesis!')
+        print('You hear a loud \"SHHHH!\" from the librarian.')
+        print('You decide to take this outside.')
+        print('.....')
+        print()
+        print('You are OUTSIDE.')
+
         if 'a' in player.inventory and 'd' in player.inventory and 's' in player.inventory:
             nemesis.set_health(200)
             player.health = 100
@@ -103,8 +110,8 @@ class Game:
                 break
     
 
-    # The Game Itself
-    def dialogue(self, player, nemesis):
+# The Game Itself
+    def dialogue(self, player, nemesis, sean, zach, sam):
         while True:
             # You are in the BEDROOM
             if player.location == 'bedroom':
@@ -115,50 +122,171 @@ class Game:
                     print('2. Check the Trashbin')
                     print("3. Go to the Bathroom")
                     print("4. Go to the Lobby")
-                    print("5. Quit.\n")
+                    print()
                     user_input = int(input('> '))
                     if user_input == 1:
+                        # Clean-up
+                        print("You lay down in bed and when you wake, you feel less hungover and refreshed.")
                         player.restore()
                     elif user_input == 2:
                         player.trash()
+                        print("You check the trash, but nothing seems to be in it.... maybe check back later.")
                     elif user_input == 3:
                         player.location = 'bathroom'
                         break
+                    elif user_input == 4:
+                        player.location = 'lobby'
+                        break
                     else:
                         print('Please enter a valid option.')
+
+
             # You are in the BATHROOM
             if player.location == 'bathroom':
                 while True:
                         print('\nYou are in the BATHROOM.')
                         self.encounter(100, player, nemesis)
                         print('What would you like to do?')
-
                         print('\n1. Check the Mirror')
                         print('2. Go back to the Bedroom')
+                        print()
                         user_input = int(input('> '))
                         # Check the Mirror
                         if user_input == 1:
                                 player.mirror()
+                                print("You look at the sweat dripping from your forehead. Was that thing real?")
+                                print("You try and convince yourself it was not and you decide to continue on with your day.")
                         # Go back to the Bedroom
                         elif user_input == 2:
                                 player.location = 'bedroom'
+                                print("You decide to head back into the bedroom.")
                                 break
                         else:
                             print('Please enter a valid option.')
-            # You are in the LOBBY
-            # Sam can be found here.
-            # Sam prompts a puzzle.
 
-            # You are OUTSIDE
+            # You are in the LOBBY.
+            if player.location == 'lobby':
+                while True:
+                    print('\nYou are in the LOBBY.')
+                    print('Your friend Zach is working the front desk.')
+                    print('It looks like he\'s studying.')
+                    print("What would you like to do?")
+                    if 'zach1' and 'zach2' in player.awareness:
+                        print('\n1. Talk to Zach again')
+                    elif 'zach1' in player.awareness:
+                        print('\n1. Help Zach with his writing')
+                    else:
+                        print('\n1. Talk to Zach')
+                    print('2. Go outside')
+                    print("3. Return to your bedroom")
+                    print()
+                    user_input = int(input('> '))
+                    print()
+                    if user_input == 1:
+                        if 'zach1' and 'zach2' in player.awareness:
+                            zach.zachTalk3(player)
+                        elif 'zach1' in player.awareness:
+                            zach.zachTalk2(player) 
+                        else: zach.zachTalk(player)
+                    elif user_input == 2:
+                        player.location = 'outside'
+                        break
+                    elif user_input == 3:
+                        player.location = 'bedroom'
+                        break
+                    else:
+                        print('Please enter a valid option.')
 
+            # You are OUTSIDE.
+            if player.location == 'outside':
+                while True:
+                    print('\nYou are OUTSIDE')
+                    print('There is an instructor dude checking their phone nearby.')
+                    print('What would you like to do?')
+                    print('\n1. Check your surroundings')
+                    print('2. Get a Pump at the Gym')
+                    if 'sean1' and 'sean2' in player.awareness:
+                        print('3. Talk to Instructor Dude again')
+                    elif 'sean1' in player.awareness:
+                        print('3. Ask Instructor Dude for a contrived example')
+                    else:
+                        print('3. Talk to the Instructor Dude')
+                    print("4. Head to the Library")
+                    print("5. Return to the Lobby")
+                    user_input = int(input('> '))
+                    if user_input == 1:
+                        print('Something seems off as you scan the area.')
+                        print('Letters seem to be missing from signs and words.') 
+                        print('You wonder if you\'re the only one seeing this...')
+                    elif user_input == 2:
+                        player.location = 'gym'
+                        break
+                    elif user_input == 3:
+                        print("You walk up to the instructor, wondering what he might have to say.")  
+                        if 'sean1' and 'sean2' in player.awareness:
+                            sean.seanTalk3(player)
+                        elif 'sean1' in player.awareness:
+                            sean.seanTalk2(player) 
+                        else: sean.seanTalk(player)
+                        # sean.seanTalk()
+                    elif user_input == 4:
+                        player.location = 'library'
+                        break
+                    elif user_input == 5:
+                        player.location == 'lobby'
+                        break
+                    else:
+                        print('Please enter a valid option.')
+
+            # You are at the LIBRARY!
+            if player.location == 'library':
+                while True:
+                    print('\nYou are at the LIBRARY.')
+                    print('The librarian welcomes you.')
+                    print('There is someone looking in your direction nearby.')
+                    print('What would you like to do?')
+                    if 'sam1' and 'sam2' in player.awareness:
+                        print('1. Talk to Sam... again!')
+                    elif 'sam1' in player.awareness:
+                        print('1. Talk to Sam')
+                    else: 
+                        print('1. Talk to the man staring')
+                    print("2. Return outside")
+                    # Does this actually work? #
+                    if 'd' and 'a' in player.inventory and 'sam2' in player.awareness:
+                        print("3. Read a Book")
+                    user_input = int(input('> '))
+                    if user_input == 1:
+                        if 'sam1' in player.awareness and 'sam2' in player.awareness:
+                            sam.samTalk3(player)
+                        elif 'sam1' in player.awareness:
+                            sam.samTalk2(player) 
+                        else: sam.samTalk(player)
+                    elif user_input == 2:
+                        player.location = 'outside'
+                        break
+                    elif user_input == 3:
+                        player.book(player)
+                        self.final_encounter(player, nemesis)
+                    else:
+                        print('Please enter a valid option.')
+                    
             # You are at the GYM
-            # Zach can be found here.
-
-
-            # You are in the LIBRARY
-            # A 100% encounter book can be found here.
-            # The Librarian prompts a puzzle.
-
+            if player.location == 'gym':
+                while True:
+                    print('\nYou are in the GYM.')
+                    print('\n There is a sign posted on the entrance.')
+                    print('What would you like to do?')
+                    print('\n1. Read the Sign')
+                    print('2. Head Back')
+                    user_input = int(input('> '))
+                    if user_input == 1:
+                        player.sign(player)
+                    elif user_input == 2:
+                        player.location = 'outside'
+                        break
+                    else:
+                        print('Please enter a valid option.')
 class Character:
     def __init__(self, name, health, power):
         self.name = name
@@ -195,6 +323,19 @@ class Player(Character):
             self.inventory.append('s')
             print('You recover the letter \'s\'')
         else: print('\nThere is nothing in the trashbin.')
+    
+    def sign(self, player):
+        print("Due to COVIB restrictions, the gym is closeb until further notice.")
+        print("Hmm. The sign seems to be off, but you're not sure in what way.")
+        print("Read it again?")
+        user_input = input('> ')
+        if user_input == 'y':
+            print("You squint at the sign and read closer. The Bs are actually Ds!")
+            print("Your memory gradually comes back to you...")
+            player.inventory.append('d')
+            print('You obtain the letter: \'D\'!')
+        else: 
+            print("You can't figure it out and decide to leave it alone.")
 
     # Rest in bedroom to restore HP
     def restore(self):
@@ -328,7 +469,8 @@ class NPC:
 # ====================================================================================================
 
     # First Conversation Zach
-    def zachTalk(self):
+    def zachTalk(self, player):
+        player.awareness.append('zach1')
         print('You decide to chat with Zach.')
         print('Zach: \"Hey! I\'m finishing my weekly write-up right now. Can you believe I found some of my notes in the trash? Glad I checked!\"')
 
@@ -342,11 +484,14 @@ class NPC:
         print('Zach: \"Oh? I\'m alright. I was just trying to remember another word for a list.\"')
         answer = input('Zach: What was it again? >> ').lower()
         if answer == 'array':
+            print()
+            player.awareness.append('zach2')
             print('Zach: \"Wow thanks! Now I can finish my write-up.\"')
             print('Your memories are slowly coming back to you...')
             player.inventory.append('a')
             print('You obtain the letter \'A\'!')
         else:
+            print()
             print('Zach: \"I don\'t think that\'s it...\"')
     
     def zachTalk3(self, player):
@@ -354,30 +499,32 @@ class NPC:
 
     # First Conversation Sam
     def samTalk(self, player):
+        player.awareness.append('sam1')
         print('You decide to approach Sam.')
-        print('Sam: \"Hey! What\'s up? Are you looking for a new book? You should check the manga section. They\'ve added some really great additions recently.\"')
+        print('Sam: \"Hey! What\'s up? Are you looking for a new book? You should check the manga section. They\'ve added some really great additions recently. You might want to prepare yourself before you read it though.\"')
 
     # Second Conversation Sam
     def samTalk2(self, player):
+        player.awareness.append('sam2')
         print('You talk to Sam again.')
-        print('Sam: \"The Gym? It\'s right across the street and to the right from here. I don\'t think they are open right now though. Why do you ask?\"')
+        print('Sam: \"Have you been by the Gym? It\'s right across the street to the right from here.\"')
 
     def samTalk3(self, player):
-        print('Sam: \"Don\'t forget to checkout once you\'re done!\"')
+        player.awareness.append('sam3')
+        print('Sam: \"Don\'t be afraid to ask questions!\"')
 
 
 
     # First Conversation ID Sean
     def seanTalk(self, player):
-        print('You decide to approach Sean.')
         print('Sean: \"Nice to see you outside! Make sure you get some rest if you aren\'t feeling good.\"')
     
     # Second Conversation ID Sean
     def seanTalk2(self, player):
-        print('Sean: \"You want a bonus question? OK! Here\'s a contrived example.\"')
+        print('Sean: \"You want a bonus question? OK!\"')
         print('Sean: \"What\'s a word for wrapping related data?\"')
         answer = input('It starts with an \'E\'? >> ').lower()
-        if answer == 'encapsulate':
+        if answer == 'encapsulate' or answer == 'encapsulation':
             print('Sean: \"Awesome job!\"')
             player.inventory.append('s')
             print('Your memories are slowly coming back to you...')

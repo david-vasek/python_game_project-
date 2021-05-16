@@ -10,8 +10,5 @@ sam = NPC('Sam')
 # gym = Location('Gym', 'You are outside of the GYM.', [])
 
 start = Game()
-# start.dialogue(player, nemesis)
-start.final_encounter(player, nemesis)
-
-
+start.dialogue(player, nemesis, sean, zach, sam)
 # sean.seanTalk2(player)
