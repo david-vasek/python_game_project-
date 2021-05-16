@@ -1,18 +1,59 @@
 # Global-Scope
 import random
 
-class Location:
-    def __init__(self, name, description, connections):
-        self.name = name
-        self.description = description
-        self.connections = connections
-# Inside of the Bedroom
-    def dialogue(self, player):
+class Game:
+    def __init__(self):
+        pass
+
+    # The Nemesis Chance to Challenge the Player
+    def encounter(self, chance, player, nemesis):
+        dice = random.randint(chance, 100)
+        if dice == 100:
+            while True:
+                print('Oh no! It\'s the Spelling Nemesis!')
+                print('\nYou have ' + str(player.health) + ' hp!')
+                print('The Spelling Nemesis has ' + str(nemesis.health) + ' hp.\n')
+                print()
+                print("What do you want to do?")
+
+                # Attack Option
+                if 'a' in player.inventory:
+                    print ('1. Attack!')
+                else: print ('1. ttck!')
+                # Defend Option
+                if 'd' in player.inventory:
+                    print("2. Defend!")
+                else:
+                    print('2. efen!')
+                # Run Away!
+                print("3. run")
+
+                print("> ",)
+                user_input = int(input())
+                if user_input == 1:
+                    player.attack(nemesis)
+                    nemesis.attacksChance(player)
+                if nemesis.health <= 0:
+                    print("Impossible!") #Literally Impossible
+                elif user_input == 2:
+                    player.defend(nemesis)
+                elif user_input == 3:
+                    print("You run away from the Nemesis.")
+                    break
+        else: 
+            pass
+    
+    # The Final Encounter with the Nemesis
+    def final_encounter(self, chance, player, nemesis):
+        pass
+
+    # The Game Itself
+    def dialogue(self, player, nemesis):
         while True:
+            # You are in the BEDROOM
             if player.location == 'bedroom':
                 while True:
-                    # You are in the BEDROOM
-                    print(self.description)
+                    print('\nYou are in the BEDROOM.')
                     print('What would you like to do?')
                     print('\n1. Take a Nap')
                     print('2. Check the Trashbin')
@@ -33,6 +74,7 @@ class Location:
             if player.location == 'bathroom':
                 while True:
                         print('\nYou are in the BATHROOM.')
+                        self.encounter(100, player, nemesis)
                         print('What would you like to do?')
 
                         print('\n1. Check the Mirror')
@@ -58,7 +100,7 @@ class Character:
 class Player(Character):
     def __init__(self, name, health, power, location):
         super().__init__(name, health, power)
-        self.inventory = []
+        self.inventory = ['a', 'd']
         self.awareness = []
         self.trashbin = []
         self.location = location
@@ -69,11 +111,18 @@ class Player(Character):
 
     # Check the Trash for letters. Boss can append letters here.
     def trash(self):
+        print('You check the trashbin.')
         if 'd' in self.trashbin:
-            pass
-        elif 's' in self.trashbin:
-            pass
-        elif '?' in self.trashbin:
+            self.inventory.append('d')
+            # index = self.inventory.index('d')
+            # self.trashbin.pop(index)
+            print('You recover the letter: \'d\'.')
+        if 'a' in self.trashbin:
+            self.inventory.append('a')
+            # index = self.inventory.index('a')
+            # self.trashbin.pop(index)
+            print('You recover the letter: \'a\'.')
+        if '?' in self.trashbin:
             pass
         else: print('\nThere is nothing in the trashbin.')
 
@@ -85,12 +134,6 @@ class Player(Character):
     # Talk to Sam
     def chat(self):
         print('You are talking to Sam.')
-
-
-    # Player encounters the Spelling Nemesis
-    def encounter(self, target):
-        print('You hear a maniacal laughter.')
-        print('The Spelling Nemesis challenges you!')
 
     # Attack the Target
     def attack(self, target):
@@ -122,15 +165,15 @@ class Player(Character):
     
 
     # Found a Letter, Goes to Inventory
-    def obtain(self, letter='none'):
+    def obtain(self, letter=''):
         if letter == 'a':
-            test = 'a'
+            test = 'a' #Array
             self.inventory.append(test)
         if letter == 'd':
-            test2 = 'd'
+            test2 = 'd' # Define
             self.inventory.append(test2)
         if letter == 's':
-            test3 = 's'
+            test3 = 's' #String
             self.inventory.append(test3)
 
 
@@ -145,7 +188,7 @@ class Boss(Character):
     # Basic Attack
     def attack(self, player):
         player.health -= self.power
-
+        print('The Spelling Nemesis attacks you with a jarble of words!')
 
 
     # Special Attack: Nemesis will prompt you to spell a word.
@@ -162,13 +205,21 @@ class Boss(Character):
         if dice == 2:
             pass
 
-    # Steals a Letter from the Player, Throws in the Trash
-    # [???] How to remove a letter and put it somewhere else
+    # Steals a letter from the Player, Throws in the Trash
     def curse(self, player):
-        print(player.inventory)
-        player.inventory.pop()
+        player.trashbin.append(player.inventory.pop())
         print('Oh no! ' + self.name + ' threw one of your letters in the trash!')
-        print(player.inventory)
+    
+    # Randomizes what attck is used.
+    def attacksChance(self, player):
+        dice = random.randint(1, 3)
+        if dice == 1:
+            self.curse(player)
+        # elif dice > 1 and dice <= 20:
+        #     self.specialAttack(player)
+        else:
+            self.attack(player)
+        
 
 
 class NPC:
