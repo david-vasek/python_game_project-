@@ -1,15 +1,14 @@
-# python_game_project-
-"The Spelling Nemesis" is a role-playing-game (RPG) that tries to enstill the urgency of proper spelling within coding. Developers need to always check their code to ensure that it is running properly and smoothly. One mistake grammatically can cause the whole code to stop working. This game adds a light-hearted take on the importance of spelling as you take on the role of the character trying to find all the missing letters to be able to spell once again. But watch out, the spelling nemesis might find you and call you out on your terrible grammer abilities. 
+# THE SPELLING NEMESIS
+Role-playing game created using Python.
 
-Python group project- The spelling nemesis strikes back
-			       This is a role-playing-game (RPG) using the python programming language
+# 
+"The Spelling Nemesis" is a role-playing game (RPG) that tries to enstill the urgency of proper spelling while writing code. Developers need to be aware that spelling counts and one tiny spelling mistake could prevent your code from working. "The Spelling Nemesis" adds a fun approach to this issue, creating a fun environment where the player has to recover their ability to spell again. This can be done by finding letters throughout the game. Watch out though, lurking in the game is the Spelling Nemesis. Should you encounter this foe, hope you can hold onto those newly acquired letters.
 
-
-Group members: 
-	David Vasek
-	Erin Harper
-	Otis 
-	Daniel Agbenu
+# Group Members
+	https://github.com/emhhd7
+	https://github.com/david-vasek
+	https://github.com/gtfotis
+	https://github.com/Dannyagg
 
 Project Topic:
 	1. Creating a RPG inspired spelling nemesis game where you are thrown into a world where you need to find letters throughout the land to help fight the 	    spelling nemesis. When encountering the spelling nemesis, if you don’t have all the letters for a certain action (like attacking or defending yourself), the 	    spelling nemesis will proceed to embarrass you by attacking you… but also attacking your confidence with rude remarks. 
