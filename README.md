@@ -5,10 +5,10 @@ Role-playing game created using Python.
 "The Spelling Nemesis" is a role-playing game (RPG) that tries to enstill the urgency of proper spelling while writing code. Developers need to be aware that spelling counts and one tiny spelling mistake could prevent your code from working. "The Spelling Nemesis" adds a fun approach to this issue, creating a fun environment where the player has to recover their ability to spell again. This can be done by finding letters throughout the game. Watch out though, lurking in the game is the Spelling Nemesis. Should you encounter this foe, hope you can hold onto those newly acquired letters.
 
 # Group Members
-	https://github.com/emhhd7
-	https://github.com/david-vasek
-	https://github.com/gtfotis
-	https://github.com/Dannyagg
+	- <a href="https://github.com/emhhd7">Erin Harper</a>
+	- <a href="https://github.com/david-vasek">David Vasek</a>
+	- <a href="https://github.com/gtfotis">Otis Wilcox</a>
+	- <a href="https://github.com/Dannyagg">Daniel Agbenu</a>
 
 Project Topic:
 	1. Creating a RPG inspired spelling nemesis game where you are thrown into a world where you need to find letters throughout the land to help fight the 	    spelling nemesis. When encountering the spelling nemesis, if you don’t have all the letters for a certain action (like attacking or defending yourself), the 	    spelling nemesis will proceed to embarrass you by attacking you… but also attacking your confidence with rude remarks. 
