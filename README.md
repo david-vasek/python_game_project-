@@ -1,60 +1,48 @@
 # THE SPELLING NEMESIS
 Role-playing game created using Python.
 
-# 
-"The Spelling Nemesis" is a role-playing game (RPG) that tries to enstill the urgency of proper spelling while writing code. Developers need to be aware that spelling counts and one tiny spelling mistake could prevent your code from working. "The Spelling Nemesis" adds a fun approach to this issue, creating a fun environment where the player has to recover their ability to spell again. This can be done by finding letters throughout the game. Watch out though, lurking in the game is the Spelling Nemesis. Should you encounter this foe, hope you can hold onto those newly acquired letters.
+
+                             @@@@@@   @@@@@@@   @@@@@@@@  @@@       @@@       @@@  @@@  @@@   @@@@@@@@     
+                            @@@@@@@   @@@@@@@@  @@@@@@@@  @@@       @@@       @@@  @@@@ @@@  @@@@@@@@@     
+                            !@@       @@!  @@@  @@!       @@!       @@!       @@!  @@!@!@@@  !@@           
+                            !@!       !@!  @!@  !@!       !@!       !@!       !@!  !@!!@!@!  !@!           
+                            !!@@!!    @!@@!@!   @!!!:!    @!!       @!!       !!@  @!@ !!@!  !@! @!@!@     
+                             !!@!!!   !!@!!!    !!!!!:    !!!       !!!       !!!  !@!  !!!  !!! !!@!!     
+                                 !:!  !!:       !!:       !!:       !!:       !!:  !!:  !!!  :!!   !!:     
+                                !:!   :!:       :!:        :!:       :!:      :!:  :!:  !:!  :!:   !::     
+                            :::: ::    ::        :: ::::   :: ::::   :: ::::   ::   ::   ::   ::: ::::     
+                            :: : :     :        : :: ::   : :: : :  : :: : :  :    ::    :    :: :: :      
+                                                                               
+                                                                               
+                               @@@  @@@  @@@@@@@@  @@@@@@@@@@   @@@@@@@@   @@@@@@   @@@   @@@@@@           
+                               @@@@ @@@  @@@@@@@@  @@@@@@@@@@@  @@@@@@@@  @@@@@@@   @@@  @@@@@@@           
+                               @@!@!@@@  @@!       @@! @@! @@!  @@!       !@@       @@!  !@@               
+                               !@!!@!@!  !@!       !@! !@! !@!  !@!       !@!       !@!  !@!               
+                               @!@ !!@!  @!!!:!    @!! !!@ @!@  @!!!:!    !!@@!!    !!@  !!@@!!            
+                               !@!  !!!  !!!!!:    !@!   ! !@!  !!!!!:     !!@!!!   !!!   !!@!!!           
+                               !!:  !!!  !!:       !!:     !!:  !!:            !:!  !!:       !:!          
+                               :!:  !:!  :!:       :!:     :!:  :!:           !:!   :!:      !:!           
+                                ::   ::   :: ::::  :::     ::    :: ::::  :::: ::    ::  :::: ::           
+                                ::    :   : :: ::    :      :    : :: ::   :: : :    :    :: : :
+
+# Description
+You awaken from a hard night of keyboard warrior-ing it up to a message from an unknown contact. Who could it be? Suddenly you encounter a mysterious person who takes your ability of spelling away. Without it, you are just another hopeless person wondering the streets not knowing how to spell. How will you get this back? Venture throughout the game and see if you can find clues on how to regain your ability to spell. BUT WATCH OUT... the Spelling Nemesis is always lurking around.
 
 # Group Members
-	- <a href="https://github.com/emhhd7">Erin Harper</a>
-	- <a href="https://github.com/david-vasek">David Vasek</a>
-	- <a href="https://github.com/gtfotis">Otis Wilcox</a>
-	- <a href="https://github.com/Dannyagg">Daniel Agbenu</a>
+- <a href="https://github.com/emhhd7">Erin Harper</a>
+- <a href="https://github.com/david-vasek">David Vasek</a>
+- <a href="https://github.com/gtfotis">Otis Wilcox</a>
+- <a href="https://github.com/Dannyagg">Daniel Agbenu</a>
 
-Project Topic:
-	1. Creating a RPG inspired spelling nemesis game where you are thrown into a world where you need to find letters throughout the land to help fight the 	    spelling nemesis. When encountering the spelling nemesis, if you don’t have all the letters for a certain action (like attacking or defending yourself), the 	    spelling nemesis will proceed to embarrass you by attacking you… but also attacking your confidence with rude remarks. 
+# Project Overview
+Tasked with creating a project in Python. Our group decided to go with a role-playing game (RPG) and use what we have learned so far in our DigitalCrafts web development bootcamp. While working in Python, We created our game using a variety of different methods
+1. Functions
+2. Strings
+3. Sequences
+4. loops
+5. etc. 
 
-	2. Searching for letters [items, inventory] throughout the game. If you’re prompted to spell something, and spell it incorrectly, the spelling nemesis will find 	    and fight you. [encounter]
-               You can’t beat the Spelling Nemesis unless you find letters that allow you to use certain actions.
-               Throughout the game, you will find ‘letters’ that will give you access to better spelling. Start with:
+"The Spelling Nemesis" is a role-playing game (RPG) that tries to enstill the urgency of proper spelling while writing code. Developers need to be aware that spelling counts and one tiny spelling mistake could prevent your code from working. "The Spelling Nemesis" adds a fun approach to this issue, creating a fun environment where the player has to recover their ability to spell again. This can be done by finding letters throughout the game. Watch out though, lurking in the game is the Spelling Nemesis. Should you encounter this foe, hope you can hold onto those newly acquired letters.
 
-	3. 
 
-	4. 
-
-	5. # PLAYER method (EXAMPLE)
-		def attack()
-		ttck (nothing)
-		if inventory contains: ‘a’ —> attack
-		efen (nothing)
-		if inventory contains: ‘d’ —> defend
-		he (nothing
-		if inventory contains: ‘a’ and ‘l’  —> defend
-		flee (40% chance)
-
-Text Decor*
-Introduction text
-
-encounters:
-“Spelling_Nemesis”
-(Nemesis enforcer)
-
-Music*
-exploration
-encounter
-
-Locations List
-Bedroom (Start)
-Bathroom (100% encounter)
-
-Premise 
-‘Drunk, type a messy message, Spelling Nemesis is a keyboard warrior that finds and curses the player with his presence.’
-
-Searching for letters [items, inventory] throughout the game. If you’re prompted to spell something, and spell it incorrectly, the spelling nemesis will find and fight you. [encounter]
-
-You can’t beat the Spelling Nemesis unless you find letters that allow you to use certain actions.
-
-Throughout the game, you will find ‘letters’ that will give you access to better spelling. 
-
-[?] Letters are obtained through a mix of NPC interactions and finding them in rooms. Added to an [inventory].
-
-Objective: Beat the Spelling Nemesis, Remove the Curse
+# Play the Game
