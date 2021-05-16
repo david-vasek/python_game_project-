@@ -1,190 +1,3 @@
-# # # Global-Scope
-# # import random
-
-# # class Location:
-# #     def __init__(self, name, description, connections):
-# #         self.name = name
-# #         self.description = description
-# #         self.connections = connections
-# # # Inside of the Bedroom
-# #     def dialogue(self, player):
-# #         while True:
-# #             if player.location == 'bedroom':
-# #                 while True:
-# #                     # You are in the BEDROOM
-# #                     print(self.description)
-# #                     print('What would you like to do?')
-# #                     print('\n1. Take a Nap')
-# #                     print('2. Check the Trashbin')
-# #                     print("3. Go to the Bathroom")
-# #                     print("4. Go to the Lobby")
-# #                     print("5. Quit.\n")
-# #                     user_input = int(input('> '))
-# #                     if user_input == 1:
-# #                         player.restore()
-# #                     elif user_input == 2:
-# #                         player.trash()
-# #                     elif user_input == 3:
-# #                         player.location = 'bathroom'
-# #                         break
-# #                     else:
-# #                         print('Please enter a valid option.')
-# #             # You are in the Bathroom
-# #             if player.location == 'bathroom':
-# #                 while True:
-# #                         print('\nYou are in the BATHROOM.')
-# #                         print('What would you like to do?')
-
-# #                         print('\n1. Check the Mirror')
-# #                         print('2. Go back to the Bedroom')
-# #                         user_input = int(input('> '))
-# #                         # Check the Mirror
-# #                         if user_input == 1:
-# #                                 player.mirror()
-# #                         # Go back to the Bedroom
-# #                         elif user_input == 2:
-# #                                 player.location = 'bedroom'
-# #                                 break
-# #                         else:
-# #                             print('Please enter a valid option.')
-
-# # class Character:
-# #     def __init__(self, name, health, power):
-# #         self.name = name
-# #         self.health = health
-# #         self.power = power
-
-
-# # class Player(Character):
-# #     def __init__(self, name, health, power, location):
-# #         super().__init__(name, health, power)
-# #         self.inventory = []
-# #         self.awareness = []
-# #         self.trashbin = []
-# #         self.location = location
-
-# #     def alive(self):
-# #         if self.health > 0:
-# #             return True
-
-# #     # Check the Trash for letters. Boss can append letters here.
-# #     def trash(self):
-# #         if 'd' in self.trashbin:
-# #             pass
-# #         elif 's' in self.trashbin:
-# #             pass
-# #         elif '?' in self.trashbin:
-# #             pass
-# #         else: print('\nThere is nothing in the trashbin.')
-
-# #     # Rest in bedroom to restore HP
-# #     def restore(self):
-# #         self.health = 45
-# #         print('\nYou take a nap and recover to full hp!')
-    
-# #     # Talk to Sam
-# #     def chat(self):
-# #         print('You are talking to Sam.')
-
-
-# #     # Player encounters the Spelling Nemesis
-# #     def encounter(self, target):
-# #         print('You hear a maniacal laughter.')
-# #         print('The Spelling Nemesis challenges you!')
-
-# #     # Attack the Target
-# #     def attack(self, target):
-# #         if 'a' in self.inventory: 
-# #             target.health -= self.power
-# #             print('You attack ' + target.name + ' for ' + str(self.power) + 'dmg!')
-# #         # Does not have the correct letter
-# #         else: print('You fail to ttck ' + target.name + '.')
-
-
-# #     # Defend against the Target
-# #     def defend(self, target):
-# #         if 'd' in self.inventory:
-# #             self.health = self.health - target.power/2
-# #             print('\nYou defend yourself against the onslaught of ' + target.name + '. ' + target.name + ' does '+ str(target.power/2) + ' dmg. \n')
-
-# #             # Chance to Heal
-# #             dice = random.randint(1, 3)
-# #             if dice == 2:
-# #                 self.health = self.health + 5
-# #                 print('BONUS! You were able to heal for 5 hp!\n')
-# #                 # Keeps HP to max
-# #                 if self.health >= 45:
-# #                     self.health = 45
-     
-# #         # Does not have the correct letter
-# #         else:
-# #             print('You failed to efen yourself against ' + target.name + '.')
-    
-
-# #     # Found a Letter, Goes to Inventory
-# #     def obtain(self, letter='none'):
-# #         if letter == 'a':
-# #             test = 'a'
-# #             self.inventory.append(test)
-# #         if letter == 'd':
-# #             test2 = 'd'
-# #             self.inventory.append(test2)
-# #         if letter == 's':
-# #             test3 = 's'
-# #             self.inventory.append(test3)
-
-
-# # class Boss(Character):
-# #     def __init__(self, name, health, power):
-# #         super().__init__(name, health, power)
-
-# #     def alive(self):
-# #         if self.health > 0:
-# #             return True
-
-# #     # Basic Attack
-# #     def attack(self, player):
-# #         player.health -= self.power
-
-
-
-# #     # Special Attack: Nemesis will prompt you to spell a word.
-# #     def specialAttack(self, player):
-# #         dice = random.randint(1, 2)
-# #         if dice == 1:
-# #             testing = input('So you think you can spell? Very well. How do you spell DEFINE? ')
-# #             if testing == 'define':
-# #                 print('AGGGGGHHH!!')
-# #             else:
-# #                 player.health -= self.power 
-# #                 print('I knew you were a fool!')
-# #                 print(self.name + ' kicks you for ' + str(self.power) + 'dmg.')
-# #         if dice == 2:
-# #             pass
-
-# #     # Steals a Letter from the Player, Throws in the Trash
-# #     # [???] How to remove a letter and put it somewhere else
-# #     def curse(self, player):
-# #         print(player.inventory)
-# #         player.inventory.pop()
-# #         print('Oh no! ' + self.name + ' threw one of your letters in the trash!')
-# #         print(player.inventory)
-
-
-# # class NPC:
-# #     def __init__(self, name, greeting, converse1, converse2):
-# #         self.name = name 
-# #         self.greeting = greeting
-# #         self.converse1 = converse1
-# #         self.converse2 = converse2
-
-# #     def hello(self, player):
-# #         print(self.greeting)
-        
-# #     def secret(self, player):
-# #         pass
-
-
 
 # def living_room():
 #     # interaction throughout one of the starting areas
@@ -239,51 +52,51 @@
 
 
 
-class Game:
-    def __init__(self):
-        pass
+# class Game:
+#     def __init__(self):
+#         pass
 
-    # The Nemesis Chance to Challenge the Player
-    def encounter(self, chance, player, nemesis):
-        dice = random.randint(chance, 100)
-        if dice == 100:
-            while True:
-                print('Oh no! It\'s the Spelling Nemesis!')
-                print('\nYou have ' + str(player.health) + ' hp!')
-                print('The Spelling Nemesis has ' + str(nemesis.health) + ' hp.\n')
-                print()
-                print("What do you want to do?")
+#     # The Nemesis Chance to Challenge the Player
+#     def encounter(self, chance, player, nemesis):
+#         dice = random.randint(chance, 100)
+#         if dice == 100:
+#             while True:
+#                 print('Oh no! It\'s the Spelling Nemesis!')
+#                 print('\nYou have ' + str(player.health) + ' hp!')
+#                 print('The Spelling Nemesis has ' + str(nemesis.health) + ' hp.\n')
+#                 print()
+#                 print("What do you want to do?")
 
-                # Attack Option
-                if 'a' in player.inventory:
-                    print ('1. Attack!')
-                else: print ('1. ttck!')
-                # Defend Option
-                if 'd' in player.inventory:
-                    print("2. Defend!")
-                else:
-                    print('2. efen!')
-                # Run Away!
-                print("3. run")
+#                 # Attack Option
+#                 if 'a' in player.inventory:
+#                     print ('1. Attack!')
+#                 else: print ('1. ttck!')
+#                 # Defend Option
+#                 if 'd' in player.inventory:
+#                     print("2. Defend!")
+#                 else:
+#                     print('2. efen!')
+#                 # Run Away!
+#                 print("3. run")
 
-                print("> ",)
-                user_input = int(input())
-                if user_input == 1:
-                    player.attack(nemesis)
-                    nemesis.attacksChance(player)
-                if nemesis.health <= 0:
-                    print("Impossible!") #Literally Impossible
-                elif user_input == 2:
-                    player.defend(nemesis)
-                elif user_input == 3:
-                    print("You run away from the Nemesis.")
-                    break
-        else: 
-            pass
+#                 print("> ",)
+#                 user_input = int(input())
+#                 if user_input == 1:
+#                     player.attack(nemesis)
+#                     nemesis.attacksChance(player)
+#                 if nemesis.health <= 0:
+#                     print("Impossible!") #Literally Impossible
+#                 elif user_input == 2:
+#                     player.defend(nemesis)
+#                 elif user_input == 3:
+#                     print("You run away from the Nemesis.")
+#                     break
+#         else: 
+#             pass
     
     # The Final Encounter with the Nemesis
-    def final_encounter(self, chance, player, nemesis):
-        while True:
+    # def final_encounter(self, chance, player, nemesis):
+    #     while True:
             # You are in the BEDROOM
             # if player.location == '':
             #     while True:
@@ -316,7 +129,7 @@ class Game:
                     print('\n1. Take a Nap')
                     print('2. Check the Trashbin')
                     print("3. Go to the Bathroom")
-                    print("4. Go to the Lobby")
+                    print("4. Go to the lobby")
                     print("5. Quit.\n")
                     user_input = int(input('> '))
                     if user_input == 1:
@@ -327,23 +140,27 @@ class Game:
                         print("You check the trash, but nothing seems to be in it.... maybe check back later.")
                     elif user_input == 3:
                         player.location = 'bathroom'
+                    elif user_input == 4:
+                        player.location = 'lobby'
                         break
                     else:
                         print('Please enter a valid option.')
+
+
             # You are in the Bathroom
             if player.location == 'bathroom':
                 while True:
                         print('\nYou are in the BATHROOM.')
                         self.encounter(100, player, nemesis)
                         print('What would you like to do?')
-
                         print('\n1. Check the Mirror')
                         print('2. Go back to the Bedroom')
                         user_input = int(input('> '))
                         # Check the Mirror
                         if user_input == 1:
                                 player.mirror()
-                                print("You look into the mirror and notice some of the leeters on your shirt are missing. What could this mean?")
+                                print("You look at the sweat dripping from your forehead. Was that thing real?")
+                                print("You try and convince yourself it was not and you decide to continue on with your day.")
                         # Go back to the Bedroom
                         elif user_input == 2:
                                 player.location = 'bedroom'
@@ -351,68 +168,46 @@ class Game:
                                 break
                         else:
                             print('Please enter a valid option.')
-            if player.location == 'livingroom':
+
+
+            if player.location == 'lobby':
                 while True:
-                    print('\nYou are in the LIVINGROOM.')
-                    print('What would you like to do?')
-                    print('\n1. Inspect the Livingroom')
-                    print('2. Go into the Kitchen')
-                    print("3. Go to the Bathroom")
-                    print("4. Head Outside")
-                    print("5. Quit.\n")
+                    print('\nYou are in the lobby.')
+                    print("What would you like to do?")
+                    print('\n1. Interact with shading guy leaning against wall')
+                    print('2. Go outside')
+                    print("3. Return to your bedroom")
                     user_input = int(input('> '))
                     if user_input == 1:
-                        print("You flop onto the couch and feel something inbetween the cushions. When you pull it out, it is the letter A")
+                        print("You cautiously walk towards the shady guy")
+                        self.samconverse1()
                     elif user_input == 2:
-                        player.location = 'kitchen'
+                        player.location = 'outside'
                     elif user_input == 3:
-                        player.location = 'bathroom'
-                    elif user_input == 4:
-                        player.location = 'frontyard'
-                    elif user_input == 5: 
-                        break
-                    else:
-                        print('Please enter a valid option.')
-            if player.location == 'kitchen':
-                while True:
-                    print('\nYou are in the KITCHEN.')
-                    print('What would you like to do?')
-                    print('\n1. Attempt to Cook a Meal')
-                    print('2. Investigate the Smell Coming from the Trash')
-                    print("3. Go to the Livingroom")
-                    print("4. Sit and think (Get a Hint)")
-                    print("5. Quit.\n")
-                    user_input = int(input('> '))
-                    if user_input == 1:
-                        print("You open up your fridge to get some milk for cereal. Sadly you don't have any. Maybe you should go to the store...")
-                    elif user_input == 2:
-                        print("You slowly open the lid to the trash. The smell of 2 week old fish hits you hard.")
-                    elif user_input == 3:
-                        player.location = 'livingroom'
-                    elif user_input == 4:
-                        print("You should start thinking about how you can aquire letters. Maybe that will help you down the line.")
-                    elif user_input == 5: 
+                        player.location = 'bedroom'
                         break
                     else:
                         print('Please enter a valid option.')
 
-            if player.location == 'frontyard':
+
+            if player.location == 'outside':
                 while True:
-                    print('\nYou are in the frontyard.')
+                    print('\nYou are outside.')
                     print('What would you like to do?')
-                    print('\n1. Investigate the Frontyard')
+                    print('\n1. Look around and enjoy the view')
                     print('2. Get a Pump at the Gym')
-                    print("3. Go back inside")
+                    print("3. Interact with a wise-looking man")
                     print("4. Head to the Library")
-                    print("5. Make Your Way to the Middle of Campus")
-                    print("5. Quit.\n")
                     user_input = int(input('> '))
                     if user_input == 1:
-                        player.restore()
+                        print("Something seems off as you scan the area. Letters seem to be missing from signs and words. I wonder if i am the only one seeing this...")
                     elif user_input == 2:
-                        player.trash()
+                        player.location = 'gym'
                     elif user_input == 3:
-                        player.location = 'bathroom'
+                        print("You walk up to the man, wondering what he might have to say")
+                        self.seanconverse1()
+                    elif user_input == 4:
+                        player.location = 'library'
                         break
                     else:
                         print('Please enter a valid option.')
@@ -421,18 +216,17 @@ class Game:
                 while True:
                     print('\nYou are in the LIBRARY.')
                     print('What would you like to do?')
-                    print('\n1. Take a Nap')
-                    print('2. Check the Trashbin')
-                    print("3. Go to the Bathroom")
-                    print("4. Go to the Lobby")
-                    print("5. Quit.\n")
+                    print('\n1. Read a book')
+                    print('2. Talk to the man starring at you behind a stack of books')
+                    print("3. Return outside")
                     user_input = int(input('> '))
                     if user_input == 1:
-                        player.restore()
+                        print("")
                     elif user_input == 2:
-                        player.trash()
+                        print("The man jumps up from behind the books as you approach")
+                        self.zachconverse1()
                     elif user_input == 3:
-                        player.location = 'bathroom'
+                        player.location = 'outside'
                         break
                     else:
                         print('Please enter a valid option.')
@@ -440,61 +234,20 @@ class Game:
                 while True:
                     print('\nYou are in the GYM.')
                     print('What would you like to do?')
-                    print('\n1. Take a Nap')
-                    print('2. Check the Trashbin')
-                    print("3. Go to the Bathroom")
-                    print("4. Go to the Lobby")
-                    print("5. Quit.\n")
+                    print('\n1. Read the sign posted on the door')
+                    print('2. Head back')
                     user_input = int(input('> '))
                     if user_input == 1:
-                        player.restore()
-                    elif user_input == 2:
-                        player.trash()
-                    elif user_input == 3:
-                        player.location = 'bathroom'
-                        break
+                        print("Due to COVIB restrictions, the gym is closeb until further notice.")
+                        print("You notice that the sign seemed to be off but you cannot put your finger on it. Do you want to read it again?")
+                        if user_input ==1:
+                            print("You notice that B\'s appear to be in the wrong place")
+                            print("Your memories slowly start to come back once again...")
+                            player.inventory.append('d')
+                            print("You obtained the letter \'a\'!')
+                        elif user_input == 2:
+                            player.location() = 'outside'
+                            break
                     else:
                         print('Please enter a valid option.')
 
-            if player.location == 'middleofcampus':
-                while True:
-                    print('\nYou are in the middle of campus.')
-                    print('What would you like to do?')
-                    print('\n1. Take a Nap')
-                    print('2. Check the Trashbin')
-                    print("3. Go to the Bathroom")
-                    print("4. Go to the Lobby")
-                    print("5. Quit.\n")
-                    user_input = int(input('> '))
-                    if user_input == 1:
-                        player.restore()
-                    elif user_input == 2:
-                        player.trash()
-                    elif user_input == 3:
-                        player.location = 'bathroom'
-                        break
-                    else:
-                        print('Please enter a valid option.')
-
-
-            if player.location == 'administrationbuilding':
-                while True:
-                    print('\nYou are in the administration building.')
-                    print('What would you like to do?')
-                    print('\n1. Take a Nap')
-                    print('2. Check the Trashbin')
-                    print("3. Go to the Bathroom")
-                    print("4. Go to the Lobby")
-                    print("5. Quit.\n")
-                    user_input = int(input('> '))
-                    if user_input == 1:
-                        player.restore()
-                    elif user_input == 2:
-                        player.trash()
-                    elif user_input == 3:
-                        player.location = 'bathroom'
-                        break
-                    else:
-                        print('Please enter a valid option.')
-
-dialogue()
