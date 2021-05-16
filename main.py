@@ -1,11 +1,10 @@
-from classes import Game, Player, Boss
+from classes import Game, Player, Boss, NPC
 import audio
 import os
 clear = lambda: os.system('clear')
 import sys
 import time
 from pygame import mixer
-
 from text import opening_sequence
 
 # Character Instances
@@ -20,3 +19,4 @@ nemesis = Boss('The Spelling Nemesis', 9999, 3)
 start = Game()
 opening_sequence()
 start.dialogue(player, nemesis)
+start.final_encounter(player, nemesis)
