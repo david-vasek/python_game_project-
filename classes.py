@@ -19,6 +19,7 @@ voice_3 = mixer.Sound("audio/voice_3.wav")
 nemesis_laugh = mixer.Sound("audio/nemesislaugh.wav")
 jarble_attack = mixer.Sound("audio/jarble_attack.wav")
 
+
 class Game:
     def __init__(self):
         pass
@@ -49,31 +50,32 @@ class Game:
                 # Run Away!
                 print("3. run")
                 print("> ",)
-                user_input = int(input())
+                user_input = input()
             
-                if user_input == 1:
+                if user_input == '1':
                     player.attack(nemesis)
                     nemesis.attacksChance(player)
-                if nemesis.health <= 0:
-                    print("Impossible!") #Literally Impossible
+                if player.health <= 0:
+                    player.game_over()
+                    
 
-                elif user_input == 2:
+                elif user_input == '2':
                     player.defend(nemesis)
 
-                elif user_input == 3:
+                elif user_input == '3':
                     mixer.music.load('audio/home_song.wav')
                     mixer.music.play(-1)
                     bathroom()
                     print("You run away from the Nemesis...")
                     break
-        else: 
-            pass
+                else: 
+                    pass
     
 #-------------------------------------------------------------------------------------
 
     def outsideEncounters(self, player, nemesis):
         dice = random.randint(1, 100)
-        if dice < 30:
+        if dice < 10:
             while True:
                 nemesis_fight()
                 print('Oh no! It\'s the Spelling Nemesis!')
@@ -102,9 +104,10 @@ class Game:
                 if user_input == 1:
                     player.attack(nemesis)
                     nemesis.attacksChance(player)
+                    if player.health <= 0:
+                        player.game_over()
                 if nemesis.health <= 0:
                     print("Impossible!") #Literally Impossible
-
                 # Defend Function Call
                 elif user_input == 2:
                     player.defend(nemesis)
@@ -174,10 +177,10 @@ class Game:
 
                 # [ Win Sequence ]
                 if nemesis.health <= 0:
-                    pass # print player.congratulations() 
+                    player.congratulations() 
                 # [ Lose Sequence ]
                 if player.health <= 0:
-                    pass # print player.game_over()
+                    player.game_over()
 
             # Defend Function Call
             elif user_input == 2:
@@ -192,10 +195,10 @@ class Game:
                 nemesis.attacksFinal(player)
                 # [ Win Sequence ]
                 if nemesis.health <= 0:
-                    pass #player.congratulations() 
+                    player.congratulations()
                 # [ Lose Sequence ]
                 if player.health <= 0:
-                    pass #player.game_over()    
+                    player.game_over()    
 
             # Run Away Function Call
             elif user_input == 4:
@@ -299,7 +302,6 @@ class Game:
             if player.location == 'outside':
                 while True:
                     go_outside()
-                    print('\nYou are OUTSIDE')
                     self.outsideEncounters(player, nemesis)
                     print('\nYou are OUTSIDE')
                     print('There is an instructor dude checking their phone nearby.')
@@ -421,10 +423,22 @@ class Player(Character):
             return True
 
     def congratulations(self):
-        pass # Add Dialogue, Congratulations Screen, Quit Game
+        # print("Insert Congradulations art work?")
+        print("Congratulations Player!")
+        print("You have vanquished the Spelling Nemesis and regained the ability to spell.")
+        print("Hopefully this gave you a new appreciation towards the importance of spelling.")
+        print("Exit game?")
+        user_input = input("\n Press [ENTER] to end game")
+        if user_input == "":
+            quit()
 
     def game_over(self):
-        pass # Add Dialogue, Game Over Screen, Quit Game
+        print("MWUHAHAAAAAHAAAAHAAAA! You still haven't mastered the ability to spell, you nimrod....")
+        print("Enjoy life as a blumbling buffoon.")
+        print("Start over?")
+        user_input = input("\n Press [ENTER] to restart")
+        if user_input == "":
+            your_room()
     
     def print_status(self):
         print()
@@ -525,14 +539,17 @@ class Player(Character):
      
         # Does not have the correct letter
         else:
+            mixer.Sound.play(buzz)
             print('You failed to efen yourself against ' + target.name + '.')
             press_enter = input('Press [ENTER] to continue ')
     
     # Find a Book in the Library, 100% Encounter
     def book(self, player):
         print('You decide to read a book.')
+        mixer.Sound.play(puzzle_solved)
         press_enter = input ('Press [ENTER] to continue ')
         player.power = player.power + 10
+        mixer.Sound.play(find_item_big)
         print('Your power increases by 10!')
         press_enter = input ('Press [ENTER] to continue ')
 
@@ -640,7 +657,9 @@ class NPC:
         player.awareness.append('zach1')
         print('You decide to chat with Zach.')
         press_enter = input('Press [ENTER] to continue ')
+        mixer.Sound.play(voice_3)
         print('Zach: \"Hey! I\'m finishing my weekly write-up right now.')
+        mixer.Sound.play(voice_2)
         print('Can you believe I found some of my notes in the trash? Glad I checked!\"')
         press_enter = input('Press [ENTER] to continue ')
         # Change option to 'Help Zach wih his Work'
@@ -656,18 +675,24 @@ class NPC:
         if answer == 'array':
             print()
             player.awareness.append('zach2')
+            mixer.Sound.play(voice_1)
             print('Zach: \"Wow thanks! Now I can finish my write-up.\"')
+            press_enter = input('Press [ENTER] to continue ')
+            mixer.Sound.play(puzzle_solved)
             print('Your memories are slowly coming back to you...')
             press_enter = input('Press [ENTER] to continue ')
             player.inventory.append('a')
+            mixer.Sound.play(find_item)
             print('You obtain the letter \'A\'! Now you can attack!')
             press_enter = input('Press [ENTER] to continue ')
         else:
             print()
+            mixer.Sound.play(voice_3)
             print('Zach: \"I don\'t think that\'s it...\"')
             press_enter = input('Press [ENTER] to continue ')
     
     def zachTalk3(self, player):
+        mixer.Sound.play(voice_2)
         print('Zach: \"Thanks again! I\'d head outside if you need some fresh air.\"')
         press_enter = input('Press [ENTER] to continue ')
 
@@ -676,6 +701,7 @@ class NPC:
         player.awareness.append('sam1')
         print('You decide to approach Sam.')
         press_enter = input('Press [ENTER] to continue ')
+        mixer.Sound.play(voice_1)
         print('Sam: \"Hey! What\'s up? Are you looking for a new book? You should check the manga section. They\'ve added some really great additions recently. You might want to prepare yourself before you read it though.\"')
         press_enter = input('Press [ENTER] to continue ')
 
@@ -684,11 +710,13 @@ class NPC:
         player.awareness.append('sam2')
         print('You talk to Sam again.')
         press_enter = input('Press [ENTER] to continue ')
+        mixer.Sound.play(voice_2)
         print('Sam: \"Have you been by the Gym? It\'s right across the street to the right from here.\"')
         press_enter = input('Press [ENTER] to continue ')
 
     def samTalk3(self, player):
         player.awareness.append('sam3')
+        mixer.Sound.play(voice_3)
         print('Sam: \"Don\'t be afraid to ask questions!\"')
         press_enter = input('Press [ENTER] to continue ')
 
@@ -697,28 +725,36 @@ class NPC:
     # First Conversation ID Sean
     def seanTalk(self, player):
         player.awareness.append('sean1')
+        mixer.Sound.play(voice_1)
         print('Sean: \"Nice to see you outside! Make sure you get some rest if you aren\'t feeling good.\"')
         press_enter = input('Press [ENTER] to continue ')
     
     # Second Conversation ID Sean
     def seanTalk2(self, player):
+        mixer.Sound.play(voice_3)
         print('Sean: \"You want a bonus question? OK!\"')
         press_enter = input('Press [ENTER] to continue ')
+        mixer.Sound.play(voice_2)
         print('Sean: \"What\'s a word for wrapping related data?\"')
         answer = input('It starts with an \'E\'? >> ').lower()
         if answer == 'encapsulate' or answer == 'encapsulation':
+            mixer.Sound.play(voice_3)
             print('Sean: \"Awesome job!\"')
             player.inventory.append('s')
             player.awareness.append('sean2')
+            mixer.Sound.play(voice_3)
             print('Your ability to spell is SUPERB!')
             press_enter = input('Press [ENTER] to continue ')
+            mixer.Sound.play(find_item_big)
             print('You obtain the letter \'S\'!')
             press_enter = input('Press [ENTER] to continue ')
         else:
+            mixer.Sound.play(voice_3)
             print('Sean: \"Nope! Sorry. You can always do a Google search for help!\"')
             press_enter = input('Press [ENTER] to continue ')
     
     # Ending Conversation
     def seanTalk3(self):
+        mixer.Sound.play(voice_2)
         print('Sean: \"Make sure you take breaks!\"')
         press_enter = input('Press [ENTER] to continue ')

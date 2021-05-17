@@ -7,6 +7,18 @@ import time
 from pygame import mixer
 from text import opening_sequence
 
+voice_1 = mixer.Sound("audio/voice_1.wav")
+find_item = mixer.Sound("audio/item_fanfare.wav")
+puzzle_solved = mixer.Sound("audio/puzzle_solved.wav")
+find_item_big = mixer.Sound("audio/item_fanfare_big.wav")
+punch_sound = mixer.Sound("audio/punch_sound.wav")
+kick_sound = mixer.Sound("audio/kick.wav")
+voice_1 = mixer.Sound("audio/voice_1.wav")
+voice_2 = mixer.Sound("audio/voice_2.wav")
+voice_3 = mixer.Sound("audio/voice_3.wav")
+nemesis_laugh = mixer.Sound("audio/nemesislaugh.wav")
+jarble_attack = mixer.Sound("audio/jarble_attack.wav")
+
 # Character Instances
 player = Player('You', 45, 5, 'bedroom')
 nemesis = Boss('The Spelling Nemesis', 9999, 3)
