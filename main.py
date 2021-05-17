@@ -1,4 +1,4 @@
-from classes import Game, Player, Boss, NPC
+from classes import *
 import audio
 import os
 clear = lambda: os.system('clear')
