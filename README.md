@@ -1,28 +1,28 @@
 # THE SPELLING NEMESIS
 Role-playing game created using Python.
 
-                     @@@@@@   @@@@@@@   @@@@@@@@  @@@       @@@       @@@  @@@  @@@   @@@@@@@@     
-                    @@@@@@@   @@@@@@@@  @@@@@@@@  @@@       @@@       @@@  @@@@ @@@  @@@@@@@@@     
-                    !@@       @@!  @@@  @@!       @@!       @@!       @@!  @@!@!@@@  !@@           
-                    !@!       !@!  @!@  !@!       !@!       !@!       !@!  !@!!@!@!  !@!           
-                    !!@@!!    @!@@!@!   @!!!:!    @!!       @!!       !!@  @!@ !!@!  !@! @!@!@     
-                     !!@!!!   !!@!!!    !!!!!:    !!!       !!!       !!!  !@!  !!!  !!! !!@!!     
-                         !:!  !!:       !!:       !!:       !!:       !!:  !!:  !!!  :!!   !!:     
-                        !:!   :!:       :!:        :!:       :!:      :!:  :!:  !:!  :!:   !::     
-                    :::: ::    ::        :: ::::   :: ::::   :: ::::   ::   ::   ::   ::: ::::     
-                    :: : :     :        : :: ::   : :: : :  : :: : :  :    ::    :    :: :: :      
+             @@@@@@   @@@@@@@   @@@@@@@@  @@@       @@@       @@@  @@@  @@@   @@@@@@@@     
+            @@@@@@@   @@@@@@@@  @@@@@@@@  @@@       @@@       @@@  @@@@ @@@  @@@@@@@@@     
+            !@@       @@!  @@@  @@!       @@!       @@!       @@!  @@!@!@@@  !@@           
+            !@!       !@!  @!@  !@!       !@!       !@!       !@!  !@!!@!@!  !@!           
+            !!@@!!    @!@@!@!   @!!!:!    @!!       @!!       !!@  @!@ !!@!  !@! @!@!@     
+             !!@!!!   !!@!!!    !!!!!:    !!!       !!!       !!!  !@!  !!!  !!! !!@!!     
+                 !:!  !!:       !!:       !!:       !!:       !!:  !!:  !!!  :!!   !!:     
+                !:!   :!:       :!:        :!:       :!:      :!:  :!:  !:!  :!:   !::     
+            :::: ::    ::        :: ::::   :: ::::   :: ::::   ::   ::   ::   ::: ::::     
+            :: : :     :        : :: ::   : :: : :  : :: : :  :    ::    :    :: :: :      
                                                                        
                                                                        
-                       @@@  @@@  @@@@@@@@  @@@@@@@@@@   @@@@@@@@   @@@@@@   @@@   @@@@@@           
-                       @@@@ @@@  @@@@@@@@  @@@@@@@@@@@  @@@@@@@@  @@@@@@@   @@@  @@@@@@@           
-                       @@!@!@@@  @@!       @@! @@! @@!  @@!       !@@       @@!  !@@               
-                       !@!!@!@!  !@!       !@! !@! !@!  !@!       !@!       !@!  !@!               
-                       @!@ !!@!  @!!!:!    @!! !!@ @!@  @!!!:!    !!@@!!    !!@  !!@@!!            
-                       !@!  !!!  !!!!!:    !@!   ! !@!  !!!!!:     !!@!!!   !!!   !!@!!!           
-                       !!:  !!!  !!:       !!:     !!:  !!:            !:!  !!:       !:!          
-                       :!:  !:!  :!:       :!:     :!:  :!:           !:!   :!:      !:!           
-                        ::   ::   :: ::::  :::     ::    :: ::::  :::: ::    ::  :::: ::           
-                        ::    :   : :: ::    :      :    : :: ::   :: : :    :    :: : :
+               @@@  @@@  @@@@@@@@  @@@@@@@@@@   @@@@@@@@   @@@@@@   @@@   @@@@@@           
+               @@@@ @@@  @@@@@@@@  @@@@@@@@@@@  @@@@@@@@  @@@@@@@   @@@  @@@@@@@           
+               @@!@!@@@  @@!       @@! @@! @@!  @@!       !@@       @@!  !@@               
+               !@!!@!@!  !@!       !@! !@! !@!  !@!       !@!       !@!  !@!               
+               @!@ !!@!  @!!!:!    @!! !!@ @!@  @!!!:!    !!@@!!    !!@  !!@@!!            
+               !@!  !!!  !!!!!:    !@!   ! !@!  !!!!!:     !!@!!!   !!!   !!@!!!           
+               !!:  !!!  !!:       !!:     !!:  !!:            !:!  !!:       !:!          
+               :!:  !:!  :!:       :!:     :!:  :!:           !:!   :!:      !:!           
+                ::   ::   :: ::::  :::     ::    :: ::::  :::: ::    ::  :::: ::           
+                ::    :   : :: ::    :      :    : :: ::   :: : :    :    :: : :
 
 # Description
 You awaken from a hard night of keyboard warrior-ing it up to a message from an unknown contact. Who could it be? Suddenly you encounter a mysterious person who takes your ability of spelling away. Without it, you are just another hopeless person wondering the streets not knowing how to spell. How will you get this back? Venture throughout the game and see if you can find clues on how to regain your ability to spell. BUT WATCH OUT... the Spelling Nemesis is always lurking around.
@@ -34,7 +34,7 @@ You awaken from a hard night of keyboard warrior-ing it up to a message from an 
 - <a href="https://github.com/Dannyagg">Daniel Agbenu</a>
 
 # Project Overview
-Tasked with creating a project in Python. Our group decided to go with a role-playing game (RPG) and use what we have learned so far in our DigitalCrafts web development bootcamp. While working in Python, We created our game using a variety of different methods
+Tasked with creating a project in Python. Our group decided to go with a role-playing game (RPG) and use what we have learned so far in our DigitalCrafts web development bootcamp. While working in Python, We created our game using a variety of different methods:
 1. Functions
 2. Strings
 3. Sequences
