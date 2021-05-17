@@ -25,7 +25,7 @@ def samTalk2(self, player):
 
 # First Interaction with Zach
 def zachTalk(self, player):
-    print("")
+    # print("have him give useful information to the player in the form of a hint")
 
 # Second Interaction with Zach
 def zachTalk2(self, player):
