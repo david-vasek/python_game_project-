@@ -4,9 +4,9 @@ import random
 import os
 clear = lambda: os.system('clear')
 import sys
-import time
+import time  
 from pygame import mixer
-from text import title, go_outside, zach_lobby, mirror, final_battle, story, that_impossible, slowprint, your_room, bathroom, fake_victory, falling_asleep, wake_up, trash_can, trash_can_a, trash_can_d, find_item, rustle_sound, sleeping_frame, punch_sound, nemesis_laugh, jarble_attack, battle_music, nemesis_fight
+from text import title, go_outside, kick_sound, gym_location, closed_sign, library_scene, zach_lobby, mirror, final_battle, story, that_impossible, slowprint, your_room, bathroom, fake_victory, falling_asleep, wake_up, trash_can, trash_can_a, trash_can_d, find_item, rustle_sound, sleeping_frame, punch_sound, nemesis_laugh, jarble_attack, battle_music, nemesis_fight
 
 class Game:
     def __init__(self):
@@ -14,7 +14,7 @@ class Game:
 
     # The Nemesis Chance to Challenge the Player
     def encounter(self, chance, player, nemesis):
-        slowprint("You thought you were safe in the " + str(player.location))
+        slowprint("You thought you were safe in the " + str(player.location) + "...")
         mixer.Sound.play(nemesis_laugh)
         dice = random.randint(chance, 100)
         if dice == 100:
@@ -60,6 +60,52 @@ class Game:
     
 #-------------------------------------------------------------------------------------
 
+    def outsideEncounters(self, player, nemesis):
+        dice = random.randint(1, 100)
+        if dice < 30:
+            while True:
+                print('Oh no! It\'s the Spelling Nemesis!')
+                print('\nYou have ' + str(player.health) + ' hp!')
+                print('The Spelling Nemesis has ' + str(nemesis.health) + ' hp.\n')
+                print()
+                print("What do you want to do?")
+
+                # Attack Option
+                if 'a' in player.inventory:
+                    print ('1. Attack!')
+                else: print ('1. ttck!')
+                # Defend Option
+                if 'd' in player.inventory:
+                    print("2. Defend!")
+                else:
+                    print('2. efen!')
+                # Run Away!
+                print("3. Run Away!")
+
+                print("> ",)
+                # The Actual Options
+                user_input = int(input())
+
+                # Attack Function Call
+                if user_input == 1:
+                    player.attack(nemesis)
+                    nemesis.attacksChance(player)
+                if nemesis.health <= 0:
+                    print("Impossible!") #Literally Impossible
+
+                # Defend Function Call
+                elif user_input == 2:
+                    player.defend(nemesis)
+        
+                # Run Away Function Call
+                elif user_input == 3:
+                    print("You run away from the Nemesis...")
+                    break
+        else: 
+            print('Have you forgotten how to count? Please enter a valid input.')
+
+ #-------------------------------------------------------------------------------------
+
     # The Final Encounter with the Nemesis
     def final_encounter(self, player, nemesis):
         mixer.music.pause()
@@ -79,13 +125,15 @@ class Game:
         mixer.music.unpause()
 
         if 'a' in player.inventory and 'd' in player.inventory and 's' in player.inventory:
-            nemesis.set_health(200)
+            nemesis.set_health(150)
             player.health = 100
         elif 'a' in player.inventory and 'd' in player.inventory:
-            nemesis.set_health(200)
+            nemesis.set_health(150)
             player.health = 70
         else: pass
-        while True:
+
+    # Final Battle Sequence
+    while player.alive() and nemesis.alive():
             print('\nYou have ' + str(player.health) + ' hp!')
             print('The Spelling Nemesis has ' + str(nemesis.health) + ' hp.\n')
             print()
@@ -106,13 +154,30 @@ class Game:
                 player.attack(nemesis)
                 nemesis.attacksFinal(player)
 
+                # [ Win Sequence ]
+                if nemesis.health <= 0:
+                    pass # print player.congratulations() 
+                # [ Lose Sequence ]
+                if player.health <= 0:
+                    pass # print player.game_over()
+
             # Defend Function Call
             elif user_input == 2:
                 player.defend(nemesis)
             
             elif user_input == 3:
                 player.teach(nemesis)
-    
+
+            # Special Function Call
+            elif user_input == 3:
+                player.teach(nemesis)
+                nemesis.attacksFinal(player)
+                # [ Win Sequence ]
+                if nemesis.health <= 0:
+                    pass #player.congratulations() 
+                # [ Lose Sequence ]
+                if player.health <= 0:
+                    pass #player.game_over()    
 
             # Run Away Function Call
             elif user_input == 4:
@@ -120,14 +185,11 @@ class Game:
                 break
             else: 
                 print('Have you also forgotten how to count? Try again. ')
-            if nemesis.health <= 0:
-                print('You\'ve defeated The Spelling Nemesis!')
-                # player.congratulations()
-                break
 
     # The Game Itself
-    def dialogue(self, player, nemesis):
+    def dialogue(self, player, nemesis, sean, zach, sam):
         while True:
+            # You are in the BEDROOM
             if player.location == 'bedroom':
                 while True:
                     your_room()
@@ -140,9 +202,11 @@ class Game:
                     print()
                     user_input = int(input('> '))
                     if user_input == 1:
+                        print("You lay down in bed and when you wake, you feel less hungover and refreshed.")
                         player.restore()
                     elif user_input == 2:
                         player.trash()
+                        print("You check the trash, but nothing seems to be in it.... maybe check back later.")
                     elif user_input == 3:
                         player.location = 'bathroom'
                         break
@@ -174,6 +238,7 @@ class Game:
                         # Go back to the Bedroom
                         elif user_input == 2:
                                 player.location = 'bedroom'
+                                print("You decide to head back into the bedroom.")
                                 break
                         else:
                             print('Please enter a valid option.')
@@ -217,39 +282,43 @@ class Game:
                 while True:
                     go_outside()
                     print('\nYou are OUTSIDE')
+                    self.outsideEncounters(player, nemesis)
+                    print('\nYou are OUTSIDE')
                     print('There is an instructor dude checking their phone nearby.')
                     print('What would you like to do?')
-                    print('\n1. Check your surroundings')
-                    print('2. Get a Pump at the Gym')
+                    print()
                     if 'sean1' and 'sean2' in player.awareness:
-                        print('3. Talk to Instructor Dude again')
+                        print('1. Talk to Instructor Dude again')
                     elif 'sean1' in player.awareness:
-                        print('3. Ask Instructor Dude for a contrived example')
+                        print('1. Ask Instructor Dude for a contrived example')
                     else:
-                        print('3. Talk to the Instructor Dude')
+                        print('1. Talk to the Instructor Dude')
+                    print('2. Check your surroundings')
+                    print('3. Get a Pump at the Gym')
                     print("4. Head to the Library")
                     print("5. Return to the Lobby")
                     user_input = int(input('> '))
-                    if user_input == 1:
+                    if user_input == 2:
                         print('Something seems off as you scan the area.')
                         print('Letters seem to be missing from signs and words.') 
                         print('You wonder if you\'re the only one seeing this...')
-                    elif user_input == 2:
+                    elif user_input == 3:
                         player.location = 'gym'
                         break
-                    elif user_input == 3:
+                    elif user_input == 1:
                         print("You walk up to the instructor, wondering what he might have to say.")  
                         if 'sean1' and 'sean2' in player.awareness:
-                            sean.seanTalk3(player)
+                            sean.seanTalk3()
                         elif 'sean1' in player.awareness:
                             sean.seanTalk2(player) 
-                        else: sean.seanTalk(player)
-                        # sean.seanTalk()
+                        else: 
+                            sean.seanTalk(player)
+
                     elif user_input == 4:
                         player.location = 'library'
                         break
                     elif user_input == 5:
-                        player.location == 'lobby'
+                        player.location = 'lobby'
                         break
                     else:
                         print('Please enter a valid option.')
@@ -257,6 +326,7 @@ class Game:
             # You are at the LIBRARY!
             if player.location == 'library':
                 while True:
+                    library_scene()
                     print('\nYou are at the LIBRARY.')
                     print('The librarian welcomes you.')
                     print('There is someone looking in your direction nearby.')
@@ -271,6 +341,8 @@ class Game:
                     # Does this actually work? #
                     if 'd' and 'a' in player.inventory and 'sam2' in player.awareness:
                         print("3. Read a Book")
+                    else:
+                        pass
                     user_input = int(input('> '))
                     if user_input == 1:
                         if 'sam1' in player.awareness and 'sam2' in player.awareness:
@@ -290,6 +362,8 @@ class Game:
             # You are at the GYM
             if player.location == 'gym':
                 while True:
+                    gym_location()
+                    self.outsideEncounters(player, nemesis)
                     print('\nYou are in the GYM.')
                     print('\n There is a sign posted on the entrance.')
                     print('What would you like to do?')
@@ -297,6 +371,7 @@ class Game:
                     print('2. Head Back')
                     user_input = int(input('> '))
                     if user_input == 1:
+                        closed_sign()
                         player.sign(player)
                     elif user_input == 2:
                         player.location = 'outside'
@@ -314,7 +389,7 @@ class Character:
 class Player(Character):
     def __init__(self, name, health, power, location):
         super().__init__(name, health, power)
-        self.inventory = ['a', 'd', 's']
+        self.inventory = []
         self.awareness = []
         self.trashbin = []
         self.location = location
@@ -322,6 +397,20 @@ class Player(Character):
     def alive(self):
         if self.health > 0:
             return True
+
+    def congratulations(self):
+        pass # Add Dialogue, Congratulations Screen, Quit Game
+
+    def game_over(self):
+        pass # Add Dialogue, Game Over Screen, Quit Game
+    
+    def print_status(self):
+        print()
+        print('You have ' + str(self.health) + ' hp.')
+        print('You have ' + str(self.power) + ' power!')
+        print('Your inventory contains: ')
+        for letter in range(len(self.inventory)):
+            print(self.inventory[letter])
 
     # Check the Trash for letters. Boss can append letters here.
     def trash(self):
@@ -354,17 +443,23 @@ class Player(Character):
         user_input = input('> ')
         if user_input == 'y':
             print("You squint at the sign and read closer. The Bs are actually Ds!")
+            print('The Bs are actually Ds!')
+            press_enter = input ('Press [ENTER]')
             print("Your memory gradually comes back to you...")
+            press_enter = input ('Press [ENTER]')
             player.inventory.append('d')
             print('You obtain the letter: \'D\'!')
+            press_enter = input ('Press [ENTER]')
         else: 
             print("You can't figure it out and decide to leave it alone.")
+            press_enter = input ('Press [ENTER]')
 
     # Rest in bedroom to restore HP
     def restore(self):
         sleeping_frame()
         self.health = 45
-        slowprint('\nYou take a nap and recover to full hp!')
+        print('\nYou take a nap and recover to full hp!')
+        press_enter = input ('Press [ENTER]')
 
     # Attack the Target
     def attack(self, target):
@@ -374,27 +469,32 @@ class Player(Character):
             print('You attack ' + target.name + ' for ' + str(self.power) + 'dmg!')
             press_enter = input('Press [ENTER]')
         # Does not have the correct letter
-        else: slowprint('You fail to ttck ' + target.name + '.')
+        else: 
+            print('You fail to ttck ' + target.name + '.')
+            press_enter = input("Press [ENTER] to continue")
 
     def teach(self, target):
         if 's' in self.inventory:
             target.health -= self.power * 2
             print('You decide to teach The Spelling Nemesis a lesson. Literally.')
-        else: print('Can\'t you read? This option is INVALID.')
+            press_enter = input ('Press [ENTER]')
+        else: 
+            print('Can\'t you read? This option is INVALID.')
+            press_enter = input ('Press [ENTER] to continue')
 
     # Defend against the Target
     def defend(self, target):
         if 'd' in self.inventory:
             self.health = self.health - target.power/2
             print('\nYou defend yourself against the onslaught of ' + target.name + '. ' + target.name + ' does '+ str(target.power/2) + ' dmg. \n')
-            press_enter = input ('Press [ENTER]')
+            press_enter = input ('Press [ENTER] to continue')
             
             # Chance to Heal
             dice = random.randint(1, 3)
             if dice == 2:
                 self.health = self.health + 5
                 print('BONUS! You were able to heal for 5 hp!\n')
-                press_enter = input ('Press [ENTER]')
+                press_enter = input ('Press [ENTER] to continue')
                 # Keeps HP to max
                 if self.health >= 45:
                     self.health = 45
@@ -407,21 +507,10 @@ class Player(Character):
     # Find a Book in the Library, 100% Encounter
     def book(self, player):
         print('You decide to read a book.')
+        press_enter = input ('Press [ENTER]')
         player.power = player.power + 10
         print('Your power increases by 10!')
-
-    # Found a Letter, Goes to Inventory
-    def obtain(self, letter=''):
-        if letter == 'a':
-            test = 'a' #Array
-            self.inventory.append(test)
-        if letter == 'd':
-            test2 = 'd' # Define
-            self.inventory.append(test2)
-        if letter == 's':
-            test3 = 's' #String
-            self.inventory.append(test3)
-
+        press_enter = input ('Press [ENTER]')
 
 class Boss(Character):
     def __init__(self, name, health, power):
@@ -441,7 +530,7 @@ class Boss(Character):
         mixer.Sound.play(jarble_attack)
         player.health -= self.power
         print('The Spelling Nemesis attacks you with a jarble of words!')
-        press_enter = input('Press [ENTER]')
+        press_enter = input('Press [ENTER] to continue ')
 
 
     # Special Attack: Nemesis will prompt you to spell a word.
@@ -451,22 +540,41 @@ class Boss(Character):
             mixer.Sound.play(nemesis_laugh)
             testing = input('So you think you can spell? Very well. How do you spell DEFINE? ')
             if testing == 'define':
+                mixer.Sound.play(that_impossible)
                 print('AGGGGGHHH!!')
-                press_enter = input('Press [ENTER]')
+                press_enter = input('Press [ENTER] to continue ')
             else:
                 player.health -= self.power 
                 print('I knew you were a fool!')
+                mixer.Sound.play(kick_sound)
                 print(self.name + ' kicks you for ' + str(self.power) + 'dmg.')
-                press_enter = input('Press [ENTER]')
+                press_enter = input('Press [ENTER] to continue ')
         if dice == 2:
-            pass
+            print('So you think you can spell? Very well.')
+            spelling2 = input('How do you spell PRINT? ')
+            if spelling2 == 'print':
+                mixer.Sound.play(that_impossible)
+                print('AGGGGGHHH!!')
+                press_enter = input('Press [ENTER] to continue ')
+            else:
+                player.health -= self.power 
+                print('I knew you were a fool!')
+                mixer.Sound.play(kick_sound)
+                print(self.name + ' kicks you for ' + str(self.power) + 'dmg.')
+                press_enter = input('Press [ENTER] to continue ')
 
     # Steals a letter from the Player, Throws in the Trash
     def curse(self, player):
-        player.trashbin.append(player.inventory.pop())
-        print('Oh no! ' + self.name + ' threw one of your letters in the trash!')
-        press_enter = input('Press [ENTER]')
-    
+        if player.inventory.len() > 1:
+            player.trashbin.append(player.inventory.pop())
+            print('Oh no! ' + self.name + ' threw one of your letters in the trash!')
+            press_enter = input("Press [ENTER] to continue ")
+        else: 
+            print('The Spelling Nemesis tried to steal a letter from you!')
+            print('There\'s not enough letters in your vocabulary to steal!')
+            print('The attack fails.')
+            press_enter = input("Press [ENTER] to continue ")
+
     # Randomizes what attck is used.
     def attacksChance(self, player):
         dice = random.randint(1, 100)
@@ -482,21 +590,18 @@ class Boss(Character):
         dice = random.randint(1, 100)
         if dice == 1:
             print("The Spelling Nemesis tries to steal one of your letters, but fails! Your spelling ability is too solid.")
-            press_enter = input('Press [ENTER]')
+            press_enter = input('Press [ENTER] to continue ')
             mixer.Sound.play(that_impossible)
             print('The Spelling Nemesis: \"Where has all this power come from?!\"')
-            press_enter = input('Press [ENTER]')
+            press_enter = input('Press [ENTER] to continue ')
         elif dice > 1 and dice <= 20:
             self.specialAttack(player)
         else:
             self.attack(player)
 
 class NPC:
-    def __init__(self, name, greeting, converse1, converse2):
+    def __init__(self, name):
         self.name = name 
-        self.greeting = greeting
-        self.converse1 = converse1
-        self.converse2 = converse2
 
     def hello(self, player):
         print(self.greeting)
@@ -510,8 +615,10 @@ class NPC:
     def zachTalk(self, player):
         player.awareness.append('zach1')
         print('You decide to chat with Zach.')
-        print('Zach: \"Hey! I\'m finishing my weekly write-up right now. Can you believe I found some of my notes in the trash? Glad I checked!\"')
-
+        press_enter = input('Press [ENTER] to continue ')
+        print('Zach: \"Hey! I\'m finishing my weekly write-up right now.')
+        print('Can you believe I found some of my notes in the trash? Glad I checked!\"')
+        press_enter = input('Press [ENTER] to continue ')
         # Change option to 'Help Zach wih his Work'
         # Create the append for self.awareness to make this work
         # if player.awareness == 'zach1':
@@ -519,6 +626,7 @@ class NPC:
     # Second Conversation Zach
     def zachTalk2(self, player):
         print('You see that Zach is deep in thought.')
+        press_enter = input('Press [ENTER] to continue ')
         print('Zach: \"Oh? I\'m alright. I was just trying to remember another word for a list.\"')
         answer = input('Zach: What was it again? >> ').lower()
         if answer == 'array':
@@ -526,50 +634,67 @@ class NPC:
             player.awareness.append('zach2')
             print('Zach: \"Wow thanks! Now I can finish my write-up.\"')
             print('Your memories are slowly coming back to you...')
+            press_enter = input('Press [ENTER] to continue ')
             player.inventory.append('a')
-            print('You obtain the letter \'A\'!')
+            print('You obtain the letter \'A\'! Now you can attack!')
+            press_enter = input('Press [ENTER] to continue ')
         else:
             print()
             print('Zach: \"I don\'t think that\'s it...\"')
+            press_enter = input('Press [ENTER] to continue ')
     
     def zachTalk3(self, player):
         print('Zach: \"Thanks again! I\'d head outside if you need some fresh air.\"')
+        press_enter = input('Press [ENTER] to continue ')
 
     # First Conversation Sam
     def samTalk(self, player):
         player.awareness.append('sam1')
         print('You decide to approach Sam.')
+        press_enter = input('Press [ENTER] to continue ')
         print('Sam: \"Hey! What\'s up? Are you looking for a new book? You should check the manga section. They\'ve added some really great additions recently. You might want to prepare yourself before you read it though.\"')
+        press_enter = input('Press [ENTER] to continue ')
 
     # Second Conversation Sam
     def samTalk2(self, player):
         player.awareness.append('sam2')
         print('You talk to Sam again.')
+        press_enter = input('Press [ENTER] to continue ')
         print('Sam: \"Have you been by the Gym? It\'s right across the street to the right from here.\"')
+        press_enter = input('Press [ENTER] to continue ')
 
     def samTalk3(self, player):
         player.awareness.append('sam3')
         print('Sam: \"Don\'t be afraid to ask questions!\"')
+        press_enter = input('Press [ENTER] to continue ')
 
 
 
     # First Conversation ID Sean
     def seanTalk(self, player):
+        player.awareness.append('sean1')
         print('Sean: \"Nice to see you outside! Make sure you get some rest if you aren\'t feeling good.\"')
+        press_enter = input('Press [ENTER] to continue ')
     
     # Second Conversation ID Sean
     def seanTalk2(self, player):
         print('Sean: \"You want a bonus question? OK!\"')
+        press_enter = input('Press [ENTER] to continue ')
         print('Sean: \"What\'s a word for wrapping related data?\"')
         answer = input('It starts with an \'E\'? >> ').lower()
         if answer == 'encapsulate' or answer == 'encapsulation':
             print('Sean: \"Awesome job!\"')
             player.inventory.append('s')
-            print('Your memories are slowly coming back to you...')
+            player.awareness.append('sean2')
+            print('Your ability to spell is SUPERB!')
+            press_enter = input('Press [ENTER] to continue ')
             print('You obtain the letter \'S\'!')
+            press_enter = input('Press [ENTER] to continue ')
         else:
             print('Sean: \"Nope! Sorry. You can always do a Google search for help!\"')
+            press_enter = input('Press [ENTER] to continue ')
     
     # Ending Conversation
     def seanTalk3(self):
         print('Sean: \"Make sure you take breaks!\"')
+        press_enter = input('Press [ENTER] to continue ')
