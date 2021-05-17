@@ -9,13 +9,12 @@ class Game:
     def encounter(self, chance, player, nemesis):
         dice = random.randint(chance, 100)
         if dice == 100:
-            while True:
+            while player.alive() and nemesis.alive():
                 print('Oh no! It\'s the Spelling Nemesis!')
                 print('\nYou have ' + str(player.health) + ' hp!')
                 print('The Spelling Nemesis has ' + str(nemesis.health) + ' hp.\n')
                 print()
                 print("What do you want to do?")
-
                 # Attack Option
                 if 'a' in player.inventory:
                     print ('1. Attack!')
@@ -36,8 +35,12 @@ class Game:
                 if user_input == 1:
                     player.attack(nemesis)
                     nemesis.attacksChance(player)
-                if nemesis.health <= 0:
-                    print("Impossible!") #Literally Impossible
+
+                    if player.health <= 0:
+                        pass # player.game_over
+
+                    if nemesis.health <= 0:
+                        print("Impossible!") #Literally.
 
                 # Defend Function Call
                 elif user_input == 2:
@@ -48,12 +51,12 @@ class Game:
                     print("You run away from the Nemesis...")
                     break
         else: 
-            pass
+            print('Have you forgotten how to count? Please enter a valid input.')
     
     def outsideEncounters(self, player, nemesis):
         dice = random.randint(1, 100)
         if dice < 30:
-            while True:
+            while player.alive() and nemesis.alive():
                 print('Oh no! It\'s the Spelling Nemesis!')
                 print('\nYou have ' + str(player.health) + ' hp!')
                 print('The Spelling Nemesis has ' + str(nemesis.health) + ' hp.\n')
@@ -80,8 +83,10 @@ class Game:
                 if user_input == 1:
                     player.attack(nemesis)
                     nemesis.attacksChance(player)
-                if nemesis.health <= 0:
-                    print("Impossible!") #Literally Impossible
+                    if nemesis.health <= 0:
+                        print('Impossible!') #Literally.
+                    if player.health <= 0:
+                        pass #player.game_over()
 
                 # Defend Function Call
                 elif user_input == 2:
@@ -92,7 +97,7 @@ class Game:
                     print("You run away from the Nemesis...")
                     break
         else: 
-            pass
+            print('Have you forgotten how to count? Please enter a valid input.')
     
     #-------------------------------------------------------------------------------------
 
@@ -107,15 +112,15 @@ class Game:
         print('You are OUTSIDE.')
 
         if 'a' in player.inventory and 'd' in player.inventory and 's' in player.inventory:
-            nemesis.set_health(200)
+            nemesis.set_health(150)
             player.health = 100
         elif 'a' in player.inventory and 'd' in player.inventory:
-            nemesis.set_health(200)
+            nemesis.set_health(150)
             player.health = 70
         else: pass
     
     # Final Battle Sequence
-        while True:
+        while player.alive() and nemesis.alive():
             print('\nYou have ' + str(player.health) + ' hp!')
             print('The Spelling Nemesis has ' + str(nemesis.health) + ' hp.\n')
             print()
@@ -136,25 +141,35 @@ class Game:
                 player.attack(nemesis)
                 nemesis.attacksFinal(player)
 
+                # [ Win Sequence ]
+                if nemesis.health <= 0:
+                    pass # print player.congratulations() 
+                # [ Lose Sequence ]
+                if player.health <= 0:
+                    pass # print player.game_over()
+
             # Defend Function Call
             elif user_input == 2:
                 player.defend(nemesis)
             
+            # Special Function Call
             elif user_input == 3:
                 player.teach(nemesis)
-                # Added*
                 nemesis.attacksFinal(player)
+                # [ Win Sequence ]
+                if nemesis.health <= 0:
+                    pass #player.congratulations() 
+                # [ Lose Sequence ]
+                if player.health <= 0:
+                    pass #player.game_over()
 
             # Run Away Function Call
             elif user_input == 4:
                 print("You run away from the Spelling Nemesis...")
                 break
+
             else: 
                 print('Have you forgotten how to count? Try again. ')
-            if nemesis.health <= 0:
-                print('You\'ve defeated The Spelling Nemesis!')
-                # player.congratulations()
-                break
     
 
 # The Game Itself
@@ -195,7 +210,7 @@ class Game:
                         self.encounter(100, player, nemesis)
                         print('What would you like to do?')
                         print('\n1. Check the Mirror')
-                        print('2. Go back to the Bedroom')
+                        print('2. Return to the Bedroom')
                         print()
                         user_input = int(input('> '))
                         # Check the Mirror
@@ -359,6 +374,22 @@ class Player(Character):
         if self.health > 0:
             return True
 
+    def congratulations(self):
+        pass # Add Dialogue, Congratulations Screen, Quit Game
+
+
+    def game_over(self):
+        pass # Add Dialogue, Game Over Screen, Quit Game
+    
+    def print_status(self):
+        print()
+        print('You have ' + str(self.health) + ' hp.')
+        print('You have ' + str(self.power) + ' power!')
+        print('Your inventory contains: ')
+        for letter in range(len(self.inventory)):
+            print(self.inventory[letter])
+
+
     # Check the Trash for letters. Boss can append letters here.
     def trash(self):
         print('You check the trashbin.')
@@ -384,7 +415,8 @@ class Player(Character):
         print("Read it again? Type \'y\' or \'n\'.")
         user_input = input('> ')
         if user_input == 'y':
-            print("You squint at the sign and read closer. The Bs are actually Ds!")
+            print("You squint at the sign and read closer.") 
+            print('The Bs are actually Ds!')
             print("Your memory gradually comes back to you...")
             player.inventory.append('d')
             print('You obtain the letter: \'D\'!')
@@ -435,19 +467,6 @@ class Player(Character):
         print('You decide to read a book.')
         player.power = player.power + 5
         print('Your power increases by 5!')
-    
-
-    # # Found a Letter, Goes to Inventory
-    # def obtain(self, letter=''):
-    #     if letter == 'a':
-    #         test = 'a' #Array
-    #         self.inventory.append(test)
-    #     if letter == 'd':
-    #         test2 = 'd' # Define
-    #         self.inventory.append(test2)
-    #     if letter == 's':
-    #         test3 = 's' #String
-    #         self.inventory.append(test3)
 
 
 class Boss(Character):
@@ -473,22 +492,38 @@ class Boss(Character):
     def specialAttack(self, player):
         dice = random.randint(1, 2)
         if dice == 1:
-            testing = input('So you think you can spell? Very well. How do you spell DEFINE? ')
-            if testing == 'define':
+            print('So you think you can spell? Very well.')
+            spelling1 = input('How do you spell RETURN? ')
+            if spelling1 == 'return':
                 print('AGGGGGHHH!!')
+                self.health -= player.power
             else:
                 player.health -= self.power 
                 print('I knew you were a fool!')
                 print(self.name + ' kicks you for ' + str(self.power) + 'dmg.')
+
         if dice == 2:
-            pass
+            print('So you think you can spell? Very well.')
+            spelling2 = input('How do you spell PRINT? ')
+            if spelling2 == 'print':
+                print('AGGGGHHHHH!!')
+                self.health -= player.power
+            else:
+                player.health -= self.power 
+                print('I knew you were a fool!')
+                print(self.name + ' kicks you for ' + str(self.power) + 'dmg.')
 
     # Steals a letter from the Player, Throws in the Trash
     def curse(self, player):
-        player.trashbin.append(player.inventory.pop())
-        print('Oh no! ' + self.name + ' threw one of your letters in the trash!')
+        if player.inventory.len() > 1:
+            player.trashbin.append(player.inventory.pop())
+            print('Oh no! ' + self.name + ' threw one of your letters in the trash!')
+        else: 
+            print('The Spelling Nemesis tried to steal a letter from you!')
+            print('There\'s not enough letters in your vocabulary to steal!')
+            print('The attack fails.')
     
-    # Randomizes what attck is used.
+    # Randomizes what attack is used.
     def attacksChance(self, player):
         dice = random.randint(1, 100)
         if dice == 1:

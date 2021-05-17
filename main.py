@@ -6,8 +6,6 @@ nemesis = Boss('The Spelling Nemesis', 9999, 3)
 sean = NPC('Sean')
 zach = NPC('Zach')
 sam = NPC('Sam')
-# lobby = Location('Lobby', 'You are in the LOBBY.', [])
-# gym = Location('Gym', 'You are outside of the GYM.', [])
 
 start = Game()
 start.dialogue(player, nemesis, sean, zach, sam)
