@@ -148,19 +148,18 @@ def story():
 #####,***/(*******//******#*******/.//////////////*/////////////////////&*//****//*/****&////***///%*//**%*****///**//(@*/////*/*///*//*/*////((((((##
 ####,,***********************************************/**//////////*//*//////*///////////////////////////////////////////////////////////////////////(#
 ======================================================================================================================================================""")
-    slowprint("""Replace""")
-    #After a night out drinking to cope with the stress from your developer boot camp, you return home to surf some forums online.\nYou find a topic titled \"Art of the written word: My Magnum Opus\" """)
-    troll_or_not = input("Do you want to leave a comment or go to sleep? ")
+    slowprint("After a night out drinking to cope with the stress from your developer boot camp...\n")
+    print("...you return home to surf some forums online. You find a topic titled \"Art of the written word: My Magnum Opus\"\n")
+    troll_or_not = input("\nDo you want to leave a comment or go to sleep? ")
     if troll_or_not == "comment":
-        slowprint("""Replace""")
-        #After submitting the snarky comment you hastily threw together, you begin to drift away into a deep, deep slumber...""")
+        slowprint("""\nAfter submitting the snarky comment you hastily threw together, you begin to drift away into a deep, deep slumber...\n""")
+        press_enter = input("Press [ENTER] to continue")
     elif troll_or_not == "sleep":
-        slowprint("""Replace""")
-        #You decide to do the right thing and mind your business because as your father once said: 'If you have nothing nice to say\nthen it\'s better to say nothing at all..'""")
+        slowprint("""\nYou decide to do the right thing and mind your business because as your father once said: \n\"If you have nothing nice to say then it\'s better to say nothing at all..\"""")
         fake_victory()
     else:
-        slowprint("""Replace""")
-        #You drunkenly decide to do it anyway and after submitting your snarky comment, you begin to drift away into a deep, deep slumber...""")
+        slowprint("""\nYou drunkenly decide to do it anyway and after submitting your snarky comment, you begin to drift away into a deep, deep slumber...""")
+        press_enter = input("\nPress [ENTER] to continue")
 def wake_up():
     clear()
     mixer.pause()
@@ -200,29 +199,24 @@ def wake_up():
 #####,***/(*******//******#*******/.//////////////*/////////////////////&*//****//*/****&////***///%*//**%*****///**//(@*/////*/*///*//*/*////((((((##
 ####,,***********************************************/**//////////*//*//////*///////////////////////////////////////////////////////////////////////(#
 ======================================================================================================================================================""")
-    slowprint("You wake up to the sound of a FaceTime call...")
+    slowprint("You wake up to the sound of a FaceTime call...\n")
+    press_enter = input("Press [ENTER] to answer ")
+    mixer.music.load('audio/funkydouchieintrosound.wav')
+    mixer.music.play(-1)
     mixer.Sound.play(voice_1)
-    print("""\"You bumbling buffoon… How does it feel sitting on a pedestal…. OF LIES. You are the one who needs to have a reality check. 
-    Your spelling is worse than my blind grandma AND SHE CANT EVEN SEE THE KEYBOARD.\"""")
-    press_enter = input("Press [ENTER] to continue...")
+    print("""\n\"You bumbling buffoon… How does it feel sitting on a pedestal…. OF LIES. You are the one who needs to have a reality check. \nYour spelling is worse than my blind grandma AND SHE CANT EVEN SEE THE KEYBOARD.\"""")
+    press_enter = input("\nPress [ENTER] to continue...")
     mixer.Sound.play(voice_3)
-    slowprint("What are you even trying to say?")
-    print("""
-    I’ll inform you I was top of my spelling class at U. S. Spelling Bee training facility, and I was a part of many hush-hush 
-    spelling operations, with 300 words confirmed to be spelled right. I was taught in gorilla tactics and paramount in quick-spelling 
-    for all US active members. I distinguish you as naught but just an additional mark. I will out spell you with razor-accuracy that 
-    you cannot comprehend, of which has not to occur on our world, mark my words. You think you can simply go off with saying all that 
-    nonsense virtually through your computing box? Think again, sir.""")
-    press_enter = input("Press [ENTER] to continue?? ")
+    slowprint("\n\"What are you even trying to say?\"")
+    mixer.Sound.play(voice_1)
+    print("""\n\"I’ll inform you I was top of my spelling class at U. S. Spelling Bee training facility, and I was a part of many hush-hush\nspelling operations, with 300 words confirmed to be spelled right. I was taught in gorilla tactics and paramount in quick-spelling\nfor all US active members. I distinguish you as naught but just an additional mark. I will out spell you with razor-accuracy that\nyou cannot comprehend, of which has not to occur on our world, mark my words. You think you can simply go off with saying all that\nnonsense virtually through your computing box? Think again, sir.""")
+    press_enter = input("\nPress [ENTER] to continue?? ")
     mixer.Sound.play(voice_2)
-    slowprint("As I say this I am...") 
-    print("""...contacting my dark group of informants across our country and your IP is in a log right now so you should wait for a storm. 
-    This storm that turns off this pitiful tiny thing you call your soul. It's final, kid. I can go any location, any hour, and I can out spell you 
-    in six thousand ways. Not only am I in high qualification in fist-to-fist spelling, but I can control all U.S.S.B.C. commandos and I will do so 
-    to put your awful spelling into a tomb. If only you had known what unholy things your “snarky” words would bring down upon you, for you would 
-    still your keyboard fingers. But you couldn’t, you didn’t, and now you pay for it. I will bring fury onto you and you will drown in it. """)
-    slowprint("You will drown.")
-    user_input = input("Press [ENTER] to ignore ")
+    slowprint("\n\"As I say this I am...\"") 
+    mixer.Sound.play(voice_3)
+    print("""\n\"...contacting my dark group of informants across our country and your IP is in a log right now so you should wait for a storm.\nThis storm that turns off this pitiful tiny thing you call your soul. It's final, kid. I can go any location, any hour, and I can out spell you\nin six thousand ways. Not only am I in high qualification in fist-to-fist spelling, but I can control all U.S.S.B.C. commandos and I will do so\nto put your awful spelling into a tomb. If only you had known what unholy things your “snarky” words would bring down upon you, for you would\nstill your keyboard fingers. But you couldn’t, you didn’t, and now you pay for it. I will bring fury onto you and you will drown in it.\" """)
+    slowprint("\n\"You will drown.\"")
+    user_input = input("\nPress [ENTER] to ignore ")
 
 def fake_victory():
     clear()
@@ -431,8 +425,8 @@ def falling_asleep():
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,*/#&((%#&(#(/%(*,,*//((%%%%%%%((/%&%%%%%%%%%(//(((//#%%%(((#/(&&#(/(%((/(/((/*********&####%%%#%##(##((((((((((((##((%%%%#%
 ======================================================================================================================================================""")
     slowprint("You pass out at your desk ... ")
-    user_input = input("                                                                                    Press [ENTER] to continue ")
-    slowprint("Dream details, woken up--")
+    user_input = input("\nPress [ENTER] to continue ")
+    slowprint("\nYou're begin to dream abou--")
 
 def trash_can():
     clear()
