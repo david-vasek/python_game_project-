@@ -426,7 +426,7 @@ def falling_asleep():
 ======================================================================================================================================================""")
     slowprint("You pass out at your desk ... ")
     user_input = input("\nPress [ENTER] to continue ")
-    slowprint("\nYou're begin to dream abou--")
+    slowprint("\nYou begin to dream abou--")
 
 def trash_can():
     clear()
